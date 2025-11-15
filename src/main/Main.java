@@ -98,6 +98,85 @@ public class Main {
                     working = false;
                     System.out.println("Завершение работы!");
                     break;
+
+
+                    //strategy tomi
+                case 5: {
+                    LanguageLearningApp app = new LanguageLearningApp();
+
+                    System.out.println("\nchoose language:");
+                    System.out.println("1 — English");
+                    System.out.println("2 — Russian");
+                    System.out.println("3 — Kazakh");
+                    System.out.println("4 — Chinese");
+
+                    int langChoice = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (langChoice) {
+                        case 1 -> app.setLanguage(new English());
+                        case 2 -> app.setLanguage(new Russian());
+                        case 3 -> app.setLanguage(new Kazakh());
+                        case 4 -> app.setLanguage(new Chinese());
+                        default -> System.out.println("we dont have this language yet.");
+                    }
+
+                    System.out.println("\nlearning method:");
+                    System.out.println("1 — Video lesson");
+                    System.out.println("2 — Audio practice");
+                    System.out.println("3 — Reading articles");
+                    System.out.println("4 — Chat with native");
+
+                    int method = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (method) {
+                        case 1 -> app.setLearningStrategy(new VideoLearning());
+                        case 2 -> app.setLearningStrategy(new AudioPractice());
+                        case 3 -> app.setLearningStrategy(new ReadingArticles());
+                        case 4 -> app.setLearningStrategy(new ChatWithNative());
+                        default -> System.out.println("we dont have this method yet.");
+                    }
+
+                    System.out.print("\nchoose the topic: ");
+                    String topic = scanner.nextLine();
+
+                    app.startLearning(topic);
+                    break;
+                }
+
+                //builder pattern (tomi)
+                case 6: {
+                    CourseBuilder builder = new CourseBuilder();
+
+                    System.out.print("\nchoose course language: ");
+                    String lang = scanner.nextLine();
+
+                    System.out.print("enter ur level;: ");
+                    String lvl = scanner.nextLine();
+
+                    builder.setLanguage(lang)
+                            .setLevel(lvl);
+
+                    System.out.println("enter topics (and 'stop' to quit):");
+                    while (true) {
+                        String t = scanner.nextLine();
+                        if (t.equalsIgnoreCase("stop")) break;
+                        builder.addTopic(t);
+                    }
+
+                    System.out.println("choose method (same thing with stop):");
+                    while (true) {
+                        String m = scanner.nextLine();
+                        if (m.equalsIgnoreCase("stop")) break;
+                        builder.addMethod(m);
+                    }
+
+                    Course course = builder.build();
+                    course.show();
+                    break;
+                }
+
                 default:
                     System.out.println("Нет такого пункта.");
             }
