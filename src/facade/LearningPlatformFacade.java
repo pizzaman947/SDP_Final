@@ -514,7 +514,7 @@ public class LearningPlatformFacade {
             
             switch (choice) {
                 case 1:
-                    Lesson lesson = selectLessonFromDatabase();
+                    Lesson lesson = selectLessonWithSource();
                     if (lesson != null) {
                         builder.addLesson(lesson);
                         System.out.println("Lesson added to builder!");
@@ -627,6 +627,15 @@ public class LearningPlatformFacade {
     }
     
     private void addLessonToCourse(Course course) {
+        Lesson lesson = selectLessonWithSource();
+        if (lesson != null) {
+            courseLessons.get(course).add(lesson);
+            System.out.println("\nLesson added to course!");
+            course.addNewLesson(lesson.getTopic() + " [" + lesson.getClass().getSimpleName() + "]");
+        }
+    }
+    
+    private Lesson selectLessonWithSource() {
         System.out.println("\nSelect lesson source:");
         System.out.println("1 — From database");
         System.out.println("2 — From My Created Lessons (" + createdLessons.size() + " lessons)");
@@ -634,19 +643,14 @@ public class LearningPlatformFacade {
         System.out.print("\nChoice: ");
         int sourceChoice = getIntInput();
         
-        if (sourceChoice == 0) return;
+        if (sourceChoice == 0) return null;
         
         if (sourceChoice == 1) {
-            Lesson lesson = selectLessonFromDatabase();
-            if (lesson != null) {
-                courseLessons.get(course).add(lesson);
-                System.out.println("\nLesson added to course!");
-                course.addNewLesson(lesson.getTopic() + " [" + lesson.getClass().getSimpleName() + "]");
-            }
+            return selectLessonFromDatabase();
         } else if (sourceChoice == 2) {
             if (createdLessons.isEmpty()) {
                 System.out.println("\nNo created lessons available!");
-                return;
+                return null;
             }
             
             System.out.println("\n=== MY CREATED LESSONS ===");
@@ -658,12 +662,10 @@ public class LearningPlatformFacade {
             int createdChoice = getIntInput();
             
             if (createdChoice > 0 && createdChoice <= createdLessons.size()) {
-                Lesson selectedLesson = createdLessons.get(createdChoice - 1);
-                courseLessons.get(course).add(selectedLesson);
-                System.out.println("\nLesson added to course!");
-                course.addNewLesson(selectedLesson.getTopic() + " [" + selectedLesson.getClass().getSimpleName() + "]");
+                return createdLessons.get(createdChoice - 1);
             }
         }
+        return null;
     }
     
     private Lesson selectLessonFromDatabase() {
