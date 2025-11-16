@@ -1,6 +1,6 @@
 package adapter.adapter;
 
-import adapter.target.LetterGradeSystem;
+import adapter.target_interface.LetterGradeSystem;
 import adapter.adaptee.PercentageGradingSystem;
 
 public class GradeAdapter implements LetterGradeSystem {
