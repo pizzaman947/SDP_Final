@@ -7,11 +7,20 @@ public class Course {
     private String courseName;
     private List<CourseObserver> observers;
     private int lessonsCompleted;
+    private List<decorator.Lesson> lessons;
 
     public Course(String courseName) {
         this.courseName = courseName;
         this.observers = new ArrayList<>();
         this.lessonsCompleted = 0;
+        this.lessons = new ArrayList<>();
+    }
+    
+    public Course(String courseName, List<decorator.Lesson> lessons) {
+        this.courseName = courseName;
+        this.observers = new ArrayList<>();
+        this.lessonsCompleted = 0;
+        this.lessons = new ArrayList<>(lessons);
     }
 
     public void subscribe(CourseObserver observer) {
@@ -51,5 +60,13 @@ public class Course {
 
     public int getObserversCount() {
         return observers.size();
+    }
+    
+    public List<decorator.Lesson> getLessons() {
+        return new ArrayList<>(lessons);
+    }
+    
+    public void addLesson(decorator.Lesson lesson) {
+        lessons.add(lesson);
     }
 }

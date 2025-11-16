@@ -1,0 +1,155 @@
+@startuml Language_Learning_Platform_Simple
+
+skinparam classAttributeIconSize 0
+skinparam nodesep 80
+skinparam ranksep 80
+
+' Main Layer
+package "Main Layer" {
+  class Main {
+    - scanner
+    - facade
+  }
+}
+
+' Facade Layer
+package "Facade Pattern" {
+  class LearningPlatformFacade {
+    - scanner
+    - learningApp
+    - currentStrategy
+    - lessonDatabase
+    - createdLessons
+    - createdCourses
+    - allStudents
+  }
+}
+
+' Factory Pattern
+package "Factory Pattern" {
+  abstract class LessonFactory
+  class VideoLessonFactory
+  class AudioLessonFactory
+  class PracticeLessonFactory
+  
+  LessonFactory <|-- VideoLessonFactory
+  LessonFactory <|-- AudioLessonFactory
+  LessonFactory <|-- PracticeLessonFactory
+}
+
+' Strategy Pattern
+package "Strategy Pattern" {
+  interface LearningStrategy
+  class VideoLearning
+  class AudioPractice
+  class ReadingArticles
+  class LanguageLearningApp {
+    - learningStrategy
+  }
+  
+  LearningStrategy <|.. VideoLearning
+  LearningStrategy <|.. AudioPractice
+  LearningStrategy <|.. ReadingArticles
+  LanguageLearningApp --> LearningStrategy
+}
+
+' Decorator Pattern
+package "Decorator Pattern" {
+  interface Lesson {
+    - topic
+  }
+  
+  class VideoLesson {
+    - topic
+    - videoUrl
+  }
+  
+  class AudioLesson {
+    - topic
+    - audioResource
+  }
+  
+  class PracticeLesson {
+    - topic
+    - exercises
+  }
+  
+  abstract class LessonDecorator {
+    - decoratedLesson
+  }
+  
+  class ChatDecorator {
+    - chatProvider
+  }
+  
+  Lesson <|.. VideoLesson
+  Lesson <|.. AudioLesson
+  Lesson <|.. PracticeLesson
+  Lesson <|.. LessonDecorator
+  LessonDecorator <|-- ChatDecorator
+  LessonDecorator o--> Lesson
+}
+
+' Adapter Pattern
+package "Adapter Pattern" {
+  interface LetterGradeSystem
+  
+  class PercentageGradingSystem {
+    
+  }
+  
+  class GradeAdapter {
+    - percentageSystem
+  }
+  
+  LetterGradeSystem <|.. GradeAdapter
+  GradeAdapter --> PercentageGradingSystem
+}
+
+' Observer Pattern
+package "Observer Pattern" {
+  interface CourseObserver
+  
+  class Student {
+    - name
+    - notificationsReceived
+  }
+  
+  class Course {
+    - courseName
+    - observers
+    - lessonsCompleted
+  }
+  
+  CourseObserver <|.. Student
+  Course --> CourseObserver
+}
+
+' Builder Pattern
+package "Builder Pattern" {
+  interface Builder
+  
+  class CourseBuilder {
+    - courseName
+    - lessons
+  }
+  
+  Builder <|.. CourseBuilder
+  CourseBuilder ..> Course : creates
+  CourseBuilder --> Lesson : uses
+}
+
+' Main Relationships
+Main --> LearningPlatformFacade
+
+LearningPlatformFacade --> LessonFactory
+LearningPlatformFacade --> LanguageLearningApp
+LearningPlatformFacade --> GradeAdapter
+LearningPlatformFacade --> LessonDecorator
+LearningPlatformFacade --> Course
+LearningPlatformFacade --> Student
+LearningPlatformFacade --> CourseBuilder
+
+LessonFactory ..> Lesson : creates
+
+@enduml

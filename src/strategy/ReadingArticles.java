@@ -1,13 +1,20 @@
 package strategy;
 
+import factory.*;
+
 public class ReadingArticles implements LearningStrategy {
     @Override
     public void learn(String topic) {
-        System.out.println("Learning by reading articles about: " + topic);
+        System.out.println("Learning by practice lessons about: " + topic);
     }
 
     @Override
     public String getMethodName() {
-        return "Reading Articles";
+        return "Practice Lessons";
+    }
+    
+    @Override
+    public LessonFactory getFactory() {
+        return new PracticeLessonFactory();
     }
 }

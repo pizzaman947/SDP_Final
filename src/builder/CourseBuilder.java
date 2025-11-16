@@ -27,7 +27,7 @@ public class CourseBuilder implements Builder {
     
     @Override
     public Course build() {
-        Course course = new Course(courseName);
+        Course course = new Course(courseName, new ArrayList<>(lessons));
         return course;
     }
     

@@ -24,6 +24,7 @@ public class LearningPlatformFacade {
     public LearningPlatformFacade(Scanner scanner) {
         this.scanner = scanner;
         this.learningApp = new LanguageLearningApp();
+        this.learningApp.setLearningStrategy(new VideoLearning());
         this.currentStrategy = "Video Learning";
         
         this.lessonDatabase = new HashMap<>();
@@ -112,24 +113,20 @@ public class LearningPlatformFacade {
         String topicName = topicData[0];
         String resource = topicData[1];
         
-        Lesson lesson = null;
-        
-        if (currentStrategy.equals("Video Learning")) {
-            LessonFactory factory = new VideoLessonFactory();
-            lesson = factory.createLesson(topicName, resource);
-        } else if (currentStrategy.equals("Audio Practice")) {
-            LessonFactory factory = new AudioLessonFactory();
-            lesson = factory.createLesson(topicName, "Audio: " + resource.replace("youtu.be", "audio.com"));
-        } else if (currentStrategy.equals("Practice Lessons")) {
-            LessonFactory factory = new PracticeLessonFactory();
-            lesson = factory.createLesson(topicName, "Practice exercises");
+        LearningStrategy strategy = learningApp.getLearningStrategy();
+        if (strategy == null) {
+            System.out.println("No learning strategy set!");
+            return;
         }
         
-        if (lesson != null) {
-            System.out.println("\n--- Starting Lesson ---");
-            lesson.start();
-            System.out.println("\nLesson completed!");
-        }
+        LessonFactory factory = strategy.getFactory();
+        String transformedResource = factory.getResourceTransform(resource);
+        Lesson lesson = factory.createLesson(topicName, transformedResource);
+        
+        System.out.println("\n--- Starting Lesson ---");
+        learningApp.startLearning(topicName);
+        lesson.start();
+        System.out.println("\nLesson completed!");
     }
     
     public void changeStrategy() {
@@ -534,17 +531,16 @@ public class LearningPlatformFacade {
                     break;
                 case 3:
                     Course newCourse = builder.build();
-                    List<Lesson> lessons = builder.getLessons();
                     createdCourses.add(newCourse);
-                    courseLessons.put(newCourse, new ArrayList<>(lessons));
+                    courseLessons.put(newCourse, new ArrayList<>(newCourse.getLessons()));
                     
-                    for (Lesson l : lessons) {
+                    for (Lesson l : newCourse.getLessons()) {
                         newCourse.addNewLesson(l.getTopic() + " [" + l.getClass().getSimpleName() + "]");
                     }
                     
                     System.out.println("\n=== COURSE BUILT SUCCESSFULLY ===");
                     System.out.println("Course: " + newCourse.getCourseName());
-                    System.out.println("Total lessons: " + lessons.size());
+                    System.out.println("Total lessons: " + newCourse.getLessons().size());
                     System.out.println("\nCourse is now available for:");
                     System.out.println("- Student subscriptions (Observer Pattern)");
                     System.out.println("- Course management (menu item 9)");

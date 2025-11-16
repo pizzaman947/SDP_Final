@@ -1,5 +1,7 @@
 package strategy;
 
+import factory.*;
+
 public class AudioPractice implements LearningStrategy {
     @Override
     public void learn(String topic) {
@@ -9,5 +11,10 @@ public class AudioPractice implements LearningStrategy {
     @Override
     public String getMethodName() {
         return "Audio Practice";
+    }
+    
+    @Override
+    public LessonFactory getFactory() {
+        return new AudioLessonFactory();
     }
 }
