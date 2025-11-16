@@ -4,7 +4,7 @@ import decorator.Lesson;
 import observer.Course;
 import java.util.*;
 
-public class CourseBuilder {
+public class CourseBuilder implements Builder {
     private String courseName;
     private List<Lesson> lessons;
     
@@ -13,16 +13,19 @@ public class CourseBuilder {
         this.lessons = new ArrayList<>();
     }
     
+    @Override
     public CourseBuilder addLesson(Lesson lesson) {
         this.lessons.add(lesson);
         return this;
     }
     
+    @Override
     public CourseBuilder addLessons(List<Lesson> lessons) {
         this.lessons.addAll(lessons);
         return this;
     }
     
+    @Override
     public Course build() {
         Course course = new Course(courseName);
         return course;
