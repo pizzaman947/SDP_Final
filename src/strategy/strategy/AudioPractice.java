@@ -1,6 +1,7 @@
-package strategy;
+package strategy.strategy;
 
-import factory.*;
+import factory.creator.LessonFactory;
+import factory.concrete_creator.AudioLessonFactory;
 
 public class AudioPractice implements LearningStrategy {
     @Override

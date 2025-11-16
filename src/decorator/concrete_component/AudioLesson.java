@@ -1,4 +1,6 @@
-package decorator;
+package decorator.concrete_component;
+
+import decorator.component.Lesson;
 
 public class AudioLesson implements Lesson {
     private String topic;

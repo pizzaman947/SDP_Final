@@ -1,4 +1,4 @@
-package adapter;
+package adapter.adaptee;
 
 public class PercentageGradingSystem {
     

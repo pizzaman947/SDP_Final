@@ -1,6 +1,6 @@
-package factory;
+package factory.creator;
 
-import decorator.*;
+import decorator.component.Lesson;
 
 public abstract class LessonFactory {
     public abstract Lesson createLesson(String topic, String additionalInfo);

@@ -1,9 +1,9 @@
 package view;
 
-import facade.LearningPlatformFacade;
-import decorator.Lesson;
-import observer.Course;
-import observer.Student;
+import facade.facade.LearningPlatformFacade;
+import decorator.component.Lesson;
+import observer.subject.Course;
+import observer.observer.Student;
 import util.Level;
 import java.util.*;
 

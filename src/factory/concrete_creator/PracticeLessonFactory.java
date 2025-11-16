@@ -1,6 +1,8 @@
-package factory;
+package factory.concrete_creator;
 
-import decorator.*;
+import factory.creator.LessonFactory;
+import decorator.component.Lesson;
+import decorator.concrete_component.PracticeLesson;
 
 public class PracticeLessonFactory extends LessonFactory {
     @Override

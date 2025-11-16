@@ -1,11 +1,17 @@
-package facade;
+package facade.facade;
 
-import adapter.*;
-import builder.*;
-import decorator.*;
-import factory.*;
-import observer.*;
-import strategy.*;
+import adapter.adapter.GradeAdapter;
+import adapter.adaptee.PercentageGradingSystem;
+import builder.concrete_builder.CourseBuilder;
+import decorator.component.Lesson;
+import decorator.concrete_component.*;
+import decorator.decorator.ChatDecorator;
+import factory.creator.LessonFactory;
+import factory.concrete_creator.*;
+import observer.subject.Course;
+import observer.observer.Student;
+import strategy.context.LanguageLearningApp;
+import strategy.strategy.*;
 import util.*;
 import java.util.*;
 

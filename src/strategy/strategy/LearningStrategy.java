@@ -1,6 +1,6 @@
-package strategy;
+package strategy.strategy;
 
-import factory.LessonFactory;
+import factory.creator.LessonFactory;
 
 public interface LearningStrategy {
     void learn(String topic);

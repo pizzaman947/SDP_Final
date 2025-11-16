@@ -1,4 +1,6 @@
-package decorator;
+package decorator.decorator;
+
+import decorator.component.Lesson;
 
 public abstract class LessonDecorator implements Lesson {
     protected Lesson decoratedLesson;

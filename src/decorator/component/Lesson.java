@@ -1,4 +1,4 @@
-package decorator;
+package decorator.component;
 
 
 public interface Lesson {

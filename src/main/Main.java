@@ -1,7 +1,7 @@
 package main;
 
 import view.ConsoleView;
-import facade.LearningPlatformFacade;
+import facade.facade.LearningPlatformFacade;
 
 public class Main {
     public static void main(String[] args) {

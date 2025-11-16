@@ -1,5 +1,7 @@
-package observer;
+package observer.subject;
 
+import decorator.component.Lesson;
+import observer.observer.CourseObserver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class Course {
     private String courseName;
     private List<CourseObserver> observers;
     private int lessonsCompleted;
-    private List<decorator.Lesson> lessons;
+    private List<Lesson> lessons;
 
     public Course(String courseName) {
         this.courseName = courseName;
@@ -16,7 +18,7 @@ public class Course {
         this.lessons = new ArrayList<>();
     }
     
-    public Course(String courseName, List<decorator.Lesson> lessons) {
+    public Course(String courseName, List<Lesson> lessons) {
         this.courseName = courseName;
         this.observers = new ArrayList<>();
         this.lessonsCompleted = 0;
@@ -62,11 +64,11 @@ public class Course {
         return observers.size();
     }
     
-    public List<decorator.Lesson> getLessons() {
+    public List<Lesson> getLessons() {
         return new ArrayList<>(lessons);
     }
     
-    public void addLesson(decorator.Lesson lesson) {
+    public void addLesson(Lesson lesson) {
         lessons.add(lesson);
     }
 }

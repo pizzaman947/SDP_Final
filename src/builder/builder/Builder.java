@@ -1,7 +1,7 @@
-package builder;
+package builder.builder;
 
-import decorator.Lesson;
-import observer.Course;
+import decorator.component.Lesson;
+import observer.subject.Course;
 import java.util.List;
 
 public interface Builder {

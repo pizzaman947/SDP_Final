@@ -1,4 +1,7 @@
-package decorator;
+package decorator.decorator;
+
+import decorator.component.Lesson;
+
 public class ChatDecorator extends LessonDecorator {
     private String chatProvider;
 

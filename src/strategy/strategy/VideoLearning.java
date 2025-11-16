@@ -1,6 +1,7 @@
-package strategy;
+package strategy.strategy;
 
-import factory.*;
+import factory.creator.LessonFactory;
+import factory.concrete_creator.VideoLessonFactory;
 
 public class VideoLearning implements LearningStrategy {
     @Override

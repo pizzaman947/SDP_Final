@@ -1,4 +1,6 @@
-package strategy;
+package strategy.context;
+
+import strategy.strategy.LearningStrategy;
 
 public class LanguageLearningApp {
     private LearningStrategy learningStrategy;

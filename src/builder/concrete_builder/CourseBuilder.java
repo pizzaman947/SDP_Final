@@ -1,7 +1,8 @@
-package builder;
+package builder.concrete_builder;
 
-import decorator.Lesson;
-import observer.Course;
+import builder.builder.Builder;
+import decorator.component.Lesson;
+import observer.subject.Course;
 import java.util.*;
 
 public class CourseBuilder implements Builder {

@@ -1,4 +1,4 @@
-package observer;
+package observer.observer;
 
 public class Student implements CourseObserver {
     private String name;
